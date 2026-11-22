@@ -4,6 +4,7 @@ import { serverFetch } from '@/lib/server'
 import { SocietyEvent, eventPath } from '@/lib/events'
 import { EventDetail } from './detail'
 import { cache } from 'react'
+import { siteOrigin } from '@/lib/site'
 export const invitation = cache(async (key: string): Promise<SocietyEvent> => {
   const r = await serverFetch('events/' + encodeURIComponent(key))
   if ([404, 400].includes(r.status)) notFound()
@@ -12,7 +13,7 @@ export const invitation = cache(async (key: string): Promise<SocietyEvent> => {
 })
 export async function Invitation({ slug, sheet = false }: { slug: string; sheet?: boolean }) {
   const e = await invitation(slug),
-    origin = process.env.PUBLIC_ORIGIN || 'http://127.0.0.1:3107',
+    origin = siteOrigin(),
     nonce = (await headers()).get('x-nonce') || undefined
   return (
     <>

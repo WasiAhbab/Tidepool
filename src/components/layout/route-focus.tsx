@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 export function RouteFocus() {
-  const path = usePathname(),
+  const path = usePathname() || '/',
     last = useRef(path)
   useEffect(() => {
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {})

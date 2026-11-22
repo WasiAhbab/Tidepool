@@ -98,7 +98,7 @@ function useHeaderState() {
 }
 
 export function Navigation({ initial }: { initial: Theme }) {
-  const path = usePathname(),
+  const path = usePathname() || '/',
     [open, setOpen] = useState(false),
     { hidden, raised } = useHeaderState()
   useEffect(() => {

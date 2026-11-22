@@ -1,4 +1,5 @@
 import { Invitation, invitation } from '@/features/events/invitation'
+import { siteOrigin } from '@/lib/site'
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params,
     e = await invitation(slug)
@@ -8,9 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: e.title,
       description: e.description.slice(0, 180),
-      images: [
-        (process.env.PUBLIC_ORIGIN || 'http://127.0.0.1:3107') + '/events/' + slug + '/share-image',
-      ],
+      images: [siteOrigin() + '/events/' + slug + '/share-image'],
     },
   }
 }

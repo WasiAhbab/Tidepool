@@ -8,14 +8,15 @@ import {
 import { Pool, PoolClient } from 'pg'
 import { randomBytes } from 'node:crypto'
 import type { Request } from 'express'
-import { config } from '../config/env'
+import { config, runtime } from '../config/env'
 import { Session, Role, hash, signature } from '../common/validation'
 @Injectable()
 export class Database implements OnModuleDestroy {
   pool = new Pool({
     connectionString: config.db,
-    max: 12,
+    max: runtime.DB_POOL_MAX,
     connectionTimeoutMillis: 5000,
+    idleTimeoutMillis: 10000,
     statement_timeout: 12000,
     options: '-c search_path=society,public -c idle_in_transaction_session_timeout=15000',
   })

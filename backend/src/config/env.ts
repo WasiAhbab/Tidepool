@@ -4,8 +4,12 @@ export function required(key: string) {
   if (!value) throw new Error('Missing configuration: ' + key)
   return value
 }
+const deploymentOrigin =
+  process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
+    ? 'https://' + process.env.VERCEL_URL
+    : required('PUBLIC_ORIGIN')
 export const config = {
-  origin: new URL(required('PUBLIC_ORIGIN')).origin,
+  origin: new URL(deploymentOrigin).origin,
   url: required('SUPABASE_URL'),
   key: required('SUPABASE_KEY'),
   secret: required('OTP_SECRET'),
@@ -44,5 +48,15 @@ export const runtime = z
     SMTP_PORT: z.coerce.number().int().min(1).max(65535),
     RETENTION_DAYS: z.coerce.number().int().min(1).max(3650).default(365),
     TRUST_PROXY_HOPS: z.coerce.number().int().min(0).max(8).default(0),
+    DB_POOL_MAX: z.coerce
+      .number()
+      .int()
+      .min(1)
+      .max(12)
+      .default(process.env.VERCEL ? 1 : 12),
+    CRON_SECRET: z.string().min(32).optional(),
   })
   .parse(process.env)
+
+if (process.env.NODE_ENV === 'production' && !runtime.CRON_SECRET)
+  throw new Error('Production requires a CRON_SECRET of at least 32 characters.')

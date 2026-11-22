@@ -12,7 +12,9 @@ import { AnnouncementsModule } from './announcements/announcements.module'
 import { AnalyticsModule } from './analytics/analytics.module'
 import { HealthModule } from './health/health.module'
 import { CalendarModule } from './calendar/calendar.module'
+import { MaintenanceController } from './mail/maintenance.controller'
 @Module({
+  controllers: [MaintenanceController],
   imports: [
     DatabaseModule,
     AuthModule,

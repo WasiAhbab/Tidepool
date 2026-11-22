@@ -1,5 +1,6 @@
 import { CalendarDays, RefreshCw, Smartphone } from 'lucide-react'
 import { CalendarSubscribe } from '@/features/calendar/components/subscribe'
+import { siteOrigin } from '@/lib/site'
 
 export const metadata = {
   title: 'Subscribe to the calendar',
@@ -7,7 +8,7 @@ export const metadata = {
 }
 
 export default function CalendarPage() {
-  const origin = new URL(process.env.PUBLIC_ORIGIN || 'http://127.0.0.1:3107').origin,
+  const origin = siteOrigin(),
     feedUrl = origin + '/api/v1/calendar/semester.ics',
     webcalUrl = feedUrl.replace(/^https?:/, 'webcal:')
 

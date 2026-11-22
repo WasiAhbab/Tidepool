@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { invitation } from '@/features/events/invitation'
 import { cover, day } from '@/lib/events'
+import { apiUrl } from '@/lib/site'
 const size = { width: 1200, height: 630 }
 
 export async function GET(_request: Request, { params }: { params: Promise<{ slug: string }> }) {
@@ -10,11 +11,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
     src = cover(e),
     art = src.startsWith('/art/')
       ? await readFile(path.join(process.cwd(), 'public', src))
-      : Buffer.from(
-          await (
-            await fetch((process.env.API_INTERNAL_URL || 'http://127.0.0.1:4107') + src)
-          ).arrayBuffer(),
-        )
+      : Buffer.from(await (await fetch(apiUrl(src))).arrayBuffer())
   const sharp = (await import('sharp')).default
   const jpg = await sharp(art).jpeg().toBuffer()
   return new ImageResponse(

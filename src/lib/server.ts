@@ -1,6 +1,7 @@
 import 'server-only'
+import { apiUrl } from './site'
 export function serverFetch(path: string) {
-  return fetch((process.env.API_INTERNAL_URL || 'http://127.0.0.1:4107') + '/api/v1/' + path, {
+  return fetch(apiUrl(path), {
     cache: 'no-store',
     signal: AbortSignal.timeout(8000),
   })

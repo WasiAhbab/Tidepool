@@ -4,16 +4,14 @@ export default {
   turbopack: { root: process.cwd() },
   devIndicators: false,
   async rewrites() {
-    const host = process.env.API_INTERNAL_URL || 'http://127.0.0.1:4107'
+    const host = process.env.API_INTERNAL_URL
+    if (!host) return []
     return [
       { source: '/api/docs/:path*', destination: host + '/api/docs/:path*' },
       { source: '/api/docs-json', destination: host + '/api/docs-json' },
       { source: '/health/:path*', destination: host + '/health/:path*' },
       { source: '/api/v1/:path*', destination: host + '/api/v1/:path*' },
-      {
-        source: '/api/:path*',
-        destination: (process.env.API_INTERNAL_URL || 'http://127.0.0.1:4107') + '/api/v1/:path*',
-      },
+      { source: '/api/:path*', destination: host + '/api/v1/:path*' },
     ]
   },
   async headers() {

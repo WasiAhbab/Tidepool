@@ -28,8 +28,9 @@ const mono = localFont({
 })
 import '@/styles/globals.css'
 import { Navigation, Footer } from '@/components/layout/navigation'
+import { siteOrigin } from '@/lib/site'
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.PUBLIC_ORIGIN || 'http://127.0.0.1:3107'),
+  metadataBase: new URL(siteOrigin()),
   icons: { apple: '/identity/apple-touch-icon.png' },
   openGraph: { images: ['/identity/share-coast.jpg'] },
   title: { default: 'Tidepool — Campus events', template: '%s · Tidepool' },

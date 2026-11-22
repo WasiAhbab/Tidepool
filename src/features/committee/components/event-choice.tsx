@@ -10,9 +10,9 @@ export function EventChoice({
 }) {
   const { data, error, reload } = useResource<SocietyEvent[]>('committee/events'),
     search = useSearchParams(),
-    [id, setId] = useState(search.get('event') || '')
+    [id, setId] = useState(search?.get('event') || '')
   useEffect(() => {
-    setId(search.get('event') || '')
+    setId(search?.get('event') || '')
   }, [search])
   const event =
     data?.find((e) => e.id === id) || data?.find((e) => e.state === 'published') || data?.[0]

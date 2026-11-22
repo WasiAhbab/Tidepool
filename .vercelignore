@@ -9,5 +9,4 @@ docs
 deploy
 docker-compose.yml
 Dockerfile
-render.yaml
 *.zip
