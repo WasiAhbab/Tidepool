@@ -1,0 +1,8 @@
+name: Tidepool
+include:
+  - society.*
+  - auth.users
+er:
+  format: svg
+  showColumnTypes:
+    enabled: true

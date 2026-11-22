@@ -1,0 +1,105 @@
+:root {
+  --fast: 150ms;
+  --enter: 230ms;
+  --morph: 380ms;
+  --ease-out: cubic-bezier(0.18, 0.78, 0.2, 1);
+}
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(.poster) {
+  animation-duration: var(--morph);
+  animation-timing-function: var(--ease-out);
+}
+::view-transition-old(.tide-exit) {
+  animation: leave var(--fast) ease-out both;
+}
+::view-transition-new(.tide-enter) {
+  animation: tide-wipe var(--enter) var(--ease-out) 80ms both;
+}
+::view-transition-new(.backward) {
+  animation: back-enter var(--enter) var(--ease-out) both;
+}
+@keyframes tide-wipe {
+  from {
+    opacity: 0.2;
+    clip-path: ellipse(65% 10% at 45% 0);
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    clip-path: ellipse(150% 170% at 50% 0);
+    transform: none;
+  }
+}
+@keyframes back-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes leave {
+  to {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+}
+@keyframes tidal-drift {
+  from {
+    transform: translateX(-1%);
+  }
+  to {
+    transform: translateX(1%);
+  }
+}
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.12em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes flip-in {
+  from {
+    transform: perspective(1000px) rotateY(14deg);
+    opacity: 0.4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes ticket-burst {
+  25% {
+    box-shadow: 0 0 0 6px #c8683a55;
+  }
+  100% {
+    box-shadow: 0 0 0 20px transparent;
+  }
+}
+@keyframes breathing {
+  50% {
+    opacity: 0.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

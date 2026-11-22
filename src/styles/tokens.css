@@ -1,0 +1,13 @@
+:root {
+  --ink: #203d49;
+  --text: #263c43;
+  --rust: #a74828;
+  --paper: #fbf9f4;
+  --cream: #f1ede3;
+  --line: #dcd9ce;
+  --muted: #5c696b;
+  --serif: var(--display-face), Georgia, serif;
+  --sans: var(--body-face), Arial, sans-serif;
+  --mono: var(--mono-face), monospace;
+  color-scheme: light;
+}

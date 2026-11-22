@@ -1,0 +1,13 @@
+.env*
+.local
+backend/dist
+node_modules
+tests
+supabase/.temp
+supabase/.branches
+docs
+deploy
+docker-compose.yml
+Dockerfile
+render.yaml
+*.zip

@@ -1,0 +1,260 @@
+.form,
+.roster {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #efe4d4;
+  color: var(--rust);
+  margin-bottom: 3px;
+}
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.885rem;
+  font-weight: 600;
+}
+.form p:not(.eyebrow),
+.roster > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+.form small {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+input:not([type='checkbox']),
+select,
+textarea {
+  border: 1px solid #c9c9bb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fffdf8;
+  accent-color: var(--ink);
+  max-width: 100%;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #698890;
+  outline-offset: 1px;
+}
+.searchline input {
+  border: 0;
+  background: transparent;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-row > * {
+  min-width: 0;
+}
+.form-row input {
+  width: 100%;
+}
+dialog {
+  color: var(--text);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  width: min(440px, calc(100% - 24px));
+  max-height: 88dvh;
+  padding: 32px;
+  box-shadow: 0 24px 90px #122f3d38;
+  overscroll-behavior: contain;
+}
+dialog:has(.editor),
+dialog:has(.roster) {
+  width: min(630px, calc(100% - 24px));
+}
+dialog[open] {
+  animation: arrive 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+dialog::backdrop {
+  background: #112c37a6;
+  backdrop-filter: blur(3px);
+}
+dialog[open]::backdrop {
+  animation: scrim-arrive 240ms ease-out both;
+}
+.dialog-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  width: 29px;
+  height: 29px;
+}
+.form h2,
+.roster h2 {
+  padding-right: 13px;
+}
+.auth-card {
+  background: #f4efe4;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px;
+  max-width: 455px;
+  margin: 36px auto;
+}
+.alert {
+  background: #f9e5da;
+  color: #7a321e !important;
+  padding: 10px 13px;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+.feedback {
+  font-size: 0.85rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.empty {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 13px;
+  padding: 45px 16px;
+}
+.empty h3 {
+  font: 400 2rem var(--serif);
+}
+.empty p {
+  color: var(--muted);
+}
+.pass-stack,
+.admin-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+.pass,
+.admin-list article {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  border: 1px solid var(--line);
+  background: #fffdf8;
+  border-radius: 12px;
+  padding: 15px;
+}
+.pass img {
+  width: 165px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.pass h2 {
+  margin: 8px 0;
+}
+.pass small,
+.guest small,
+.admin-event small,
+.admin-event p {
+  color: var(--muted);
+}
+.row-actions {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.row-actions .text-btn {
+  padding-left: 0;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.metrics > div {
+  border-radius: 12px;
+  background: var(--cream);
+  padding: 17px 20px;
+}
+.metrics b {
+  display: block;
+  font: 400 2.8rem var(--serif);
+}
+.admin-bar,
+.admin-list article,
+.guest {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+.admin-bar {
+  margin-top: 24px;
+}
+.admin-bar input {
+  min-width: 0;
+}
+.admin-list img {
+  width: 83px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.admin-event {
+  flex: 1;
+}
+.admin-event h3 {
+  font-size: 1.65rem;
+  margin: 4px 0;
+}
+.admin-event p {
+  font-size: 0.85rem;
+}
+.roster-tools {
+  display: flex;
+}
+.roster-tools .searchline {
+  margin: 0;
+  flex: 1;
+}
+.guest {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.guest > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.guest small {
+  display: block;
+}
+.guest button {
+  flex-shrink: 0;
+}
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+@keyframes scrim-arrive {
+  from {
+    background: #112c3700;
+  }
+  to {
+    background: #112c37a6;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog[open],
+  dialog[open]::backdrop {
+    animation: none !important;
+  }
+}

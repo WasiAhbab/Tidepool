@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label":"Set up local Supabase","type":"npm","script":"setup","problemMatcher":[]},
+    {"label":"Run Tidepool","type":"npm","script":"dev","isBackground":true,"problemMatcher":[]},
+    {"label":"Build web and API","type":"npm","script":"build","group":"build","problemMatcher":[]},
+    {"label":"Test admission and access","type":"npm","script":"test","group":"test","problemMatcher":[]},
+    {"label":"Test browser journeys","type":"npm","script":"test:browser","group":"test","problemMatcher":[]}
+  ]
+}

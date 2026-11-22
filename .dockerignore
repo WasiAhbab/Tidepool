@@ -1,0 +1,9 @@
+node_modules
+.next
+.local
+.env*
+.git
+backend/dist
+supabase/.temp
+supabase/.branches
+*.tsbuildinfo

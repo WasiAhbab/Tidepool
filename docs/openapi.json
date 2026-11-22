@@ -1,0 +1,3162 @@
+{
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/auth/code": {
+      "post": {
+        "operationId": "AuthController_challenge",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "maxLength": 254,
+                    "format": "email",
+                    "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Public endpoint. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/auth/verify": {
+      "post": {
+        "operationId": "AuthController_verify",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                  },
+                  "code": {
+                    "type": "string",
+                    "pattern": "^\\d{6}$"
+                  }
+                },
+                "required": [
+                  "id",
+                  "code"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Public endpoint. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/auth/committee": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "maxLength": 254,
+                    "format": "email",
+                    "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Public endpoint. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/auth/session": {
+      "get": {
+        "operationId": "AuthController_current",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "description": "Public endpoint."
+      }
+    },
+    "/api/v1/auth/staff": {
+      "get": {
+        "operationId": "AuthController_staff",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Committee access, including door volunteers."
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "operationId": "AuthController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "guest": []
+          }
+        ],
+        "description": "Requires a verified student email."
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "guest",
+                      "committee"
+                    ]
+                  }
+                },
+                "required": [
+                  "role"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Public endpoint. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/events": {
+      "get": {
+        "operationId": "EventsController_list",
+        "parameters": [
+          {
+            "name": "scope",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "description": "Public endpoint."
+      }
+    },
+    "/api/v1/events/{id}": {
+      "get": {
+        "operationId": "EventsController_detail",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "description": "Public endpoint."
+      }
+    },
+    "/api/v1/committee/events": {
+      "get": {
+        "operationId": "EventsController_adminList",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators."
+      },
+      "post": {
+        "operationId": "EventsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 90
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "Hackathon",
+                      "Workshop",
+                      "Talk",
+                      "Social"
+                    ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 4000
+                  },
+                  "venue": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 120
+                  },
+                  "capacity": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10000
+                  },
+                  "starts_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                  },
+                  "ends_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "draft",
+                      "published",
+                      "cancelled",
+                      "archived"
+                    ]
+                  }
+                },
+                "required": [
+                  "title",
+                  "category",
+                  "description",
+                  "venue",
+                  "capacity",
+                  "starts_at",
+                  "ends_at",
+                  "state"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/events/{id}": {
+      "patch": {
+        "operationId": "EventsController_edit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 90
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "Hackathon",
+                      "Workshop",
+                      "Talk",
+                      "Social"
+                    ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 4000
+                  },
+                  "venue": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 120
+                  },
+                  "capacity": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10000
+                  },
+                  "starts_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                  },
+                  "ends_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "draft",
+                      "published",
+                      "cancelled",
+                      "archived"
+                    ]
+                  },
+                  "revision": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "title",
+                  "category",
+                  "description",
+                  "venue",
+                  "capacity",
+                  "starts_at",
+                  "ends_at",
+                  "state",
+                  "revision"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/events/{id}/settings": {
+      "put": {
+        "operationId": "ControlsController_save",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Controls"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "revision": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "room_limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10000
+                  },
+                  "override_reason": {
+                    "type": "string",
+                    "maxLength": 240
+                  },
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "email_domain": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "pattern": "^(?:[a-z0-9-]+(?:\\.[a-z0-9-]+)+)?$"
+                  },
+                  "opens_at": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "closes_at": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "plus_one": {
+                    "type": "boolean"
+                  },
+                  "waitlist_enabled": {
+                    "type": "boolean"
+                  },
+                  "cover": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^(?:\\/art\\/(?:workshop|social|talk|hackathon)(?:-[23])?\\.webp|\\/api\\/v1\\/covers\\/[0-9a-f-]{36})$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "revision",
+                  "room_limit",
+                  "override_reason",
+                  "timezone",
+                  "email_domain",
+                  "opens_at",
+                  "closes_at",
+                  "plus_one",
+                  "waitlist_enabled",
+                  "cover"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/events/{id}/archive": {
+      "post": {
+        "operationId": "ControlsController_archive",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Controls"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "revision": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "revision"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/events/{id}/duplicate": {
+      "post": {
+        "operationId": "ControlsController_duplicate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Controls"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/covers": {
+      "post": {
+        "operationId": "ControlsController_upload",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Controls"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 1400000
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/covers/{id}": {
+      "get": {
+        "operationId": "ControlsController_cover",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Controls"
+        ],
+        "description": "Public endpoint."
+      }
+    },
+    "/api/v1/events/{id}/register": {
+      "post": {
+        "operationId": "RegistrationsController_register",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 100
+                  },
+                  "waitlist": {
+                    "type": "boolean"
+                  },
+                  "consent": {
+                    "type": "boolean",
+                    "const": true
+                  },
+                  "listed": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "companion": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "website": {
+                    "type": "string",
+                    "const": ""
+                  },
+                  "answers": {
+                    "default": {},
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                    },
+                    "additionalProperties": {
+                      "type": "string",
+                      "maxLength": 600
+                    }
+                  },
+                  "request_key": {
+                    "type": "string",
+                    "format": "uuid",
+                    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                  }
+                },
+                "required": [
+                  "name",
+                  "waitlist",
+                  "consent"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "guest": []
+          }
+        ],
+        "description": "Requires a verified student email. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/events/{id}/cancel-pass": {
+      "post": {
+        "operationId": "RegistrationsController_cancel",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "security": [
+          {
+            "guest": []
+          }
+        ],
+        "description": "Requires a verified student email. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/events/{id}/programme": {
+      "get": {
+        "operationId": "AgendaController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agenda"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators."
+      },
+      "put": {
+        "operationId": "AgendaController_save",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agenda"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "revision": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "tags": {
+                    "maxItems": 15,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120
+                    }
+                  },
+                  "speakers": {
+                    "maxItems": 30,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 120
+                        },
+                        "bio": {
+                          "type": "string",
+                          "maxLength": 700
+                        },
+                        "avatar": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 4
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "bio",
+                        "avatar"
+                      ]
+                    }
+                  },
+                  "sessions": {
+                    "maxItems": 120,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 120
+                        },
+                        "starts_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                        },
+                        "ends_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                        },
+                        "room": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 120
+                        },
+                        "track": {
+                          "type": "string",
+                          "maxLength": 100
+                        },
+                        "speaker": {
+                          "type": "string",
+                          "maxLength": 120
+                        }
+                      },
+                      "required": [
+                        "title",
+                        "starts_at",
+                        "ends_at",
+                        "room",
+                        "track",
+                        "speaker"
+                      ]
+                    }
+                  },
+                  "questions": {
+                    "maxItems": 12,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                        },
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 120
+                        },
+                        "required": {
+                          "type": "boolean"
+                        },
+                        "options": {
+                          "maxItems": 20,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 120
+                          }
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "required",
+                        "options"
+                      ]
+                    }
+                  },
+                  "resources": {
+                    "maxItems": 15,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 120
+                        },
+                        "url": {
+                          "type": "string",
+                          "pattern": "^https:\\/\\/"
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "url"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "revision",
+                  "tags",
+                  "speakers",
+                  "sessions",
+                  "questions",
+                  "resources"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/events/{id}/roster": {
+      "get": {
+        "operationId": "RosterController_roster",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Roster"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators."
+      }
+    },
+    "/api/v1/committee/events/{id}/export": {
+      "get": {
+        "operationId": "RosterController_exp",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Roster"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators."
+      }
+    },
+    "/api/v1/committee/events/{id}/bulk": {
+      "post": {
+        "operationId": "RosterController_bulk",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Roster"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "minItems": 1,
+                    "maxItems": 300,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                    }
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "cancel",
+                      "promote",
+                      "resend",
+                      "message"
+                    ]
+                  },
+                  "message": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "request_key": {
+                    "type": "string",
+                    "format": "uuid",
+                    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                  }
+                },
+                "required": [
+                  "ids",
+                  "action",
+                  "request_key"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/team": {
+      "get": {
+        "operationId": "AuditController_team",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audit"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Administrators only."
+      },
+      "post": {
+        "operationId": "AuditController_appoint",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audit"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "organizer",
+                      "volunteer",
+                      "admin"
+                    ]
+                  }
+                },
+                "required": [
+                  "email",
+                  "role"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Administrators only. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/team/{id}": {
+      "patch": {
+        "operationId": "AuditController_role",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audit"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "volunteer",
+                      "organizer",
+                      "admin"
+                    ]
+                  }
+                },
+                "required": [
+                  "role"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Administrators only. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/audit": {
+      "get": {
+        "operationId": "AuditController_logs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audit"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Administrators only."
+      }
+    },
+    "/api/v1/committee/mail": {
+      "get": {
+        "operationId": "AuditController_mail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audit"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Administrators only."
+      }
+    },
+    "/api/v1/committee/mail/retry": {
+      "post": {
+        "operationId": "AuditController_retry",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audit"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Administrators only. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/check-in/events": {
+      "get": {
+        "operationId": "CheckinController_events",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Checkin"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Committee access, including door volunteers."
+      }
+    },
+    "/api/v1/check-in/{id}": {
+      "get": {
+        "operationId": "CheckinController_find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Checkin"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Committee access, including door volunteers."
+      }
+    },
+    "/api/v1/committee/events/{id}/check-in": {
+      "post": {
+        "operationId": "CheckinController_check",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Checkin"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "ticket": {
+                        "type": "string",
+                        "maxLength": 300
+                      }
+                    },
+                    "required": [
+                      "ticket"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "registration": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                      },
+                      "checked": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "registration",
+                      "checked"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Committee access, including door volunteers. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/passes": {
+      "get": {
+        "operationId": "PassesController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Passes"
+        ],
+        "security": [
+          {
+            "guest": []
+          }
+        ],
+        "description": "Requires a verified student email."
+      }
+    },
+    "/api/v1/passes/data": {
+      "get": {
+        "operationId": "PassesController_data",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Passes"
+        ],
+        "security": [
+          {
+            "guest": []
+          }
+        ],
+        "description": "Requires a verified student email."
+      }
+    },
+    "/api/v1/passes/erase": {
+      "post": {
+        "operationId": "PassesController_erase",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Passes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "confirm": {
+                    "type": "string",
+                    "const": "DELETE"
+                  }
+                },
+                "required": [
+                  "confirm"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "guest": []
+          }
+        ],
+        "description": "Requires a verified student email. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/passes/{id}/feedback": {
+      "post": {
+        "operationId": "FeedbackController_send",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Feedback"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rating": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  },
+                  "comment": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                },
+                "required": [
+                  "rating",
+                  "comment"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "guest": []
+          }
+        ],
+        "description": "Requires a verified student email. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/events/{id}/announcements": {
+      "get": {
+        "operationId": "AnnouncementsController_list",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Announcements"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators."
+      },
+      "post": {
+        "operationId": "AnnouncementsController_send",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Announcements"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subject": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 140
+                  },
+                  "body": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 4000
+                  },
+                  "audience": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "confirmed",
+                      "waitlisted"
+                    ]
+                  },
+                  "request_key": {
+                    "type": "string",
+                    "format": "uuid",
+                    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                  }
+                },
+                "required": [
+                  "subject",
+                  "body",
+                  "audience",
+                  "request_key"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators. Send the site origin in the Origin header."
+      }
+    },
+    "/api/v1/committee/analytics": {
+      "get": {
+        "operationId": "AnalyticsController_get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Analytics"
+        ],
+        "security": [
+          {
+            "committee": []
+          }
+        ],
+        "description": "Organizers and administrators."
+      }
+    },
+    "/health/live": {
+      "get": {
+        "operationId": "HealthController_live",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ],
+        "description": "Public endpoint."
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "operationId": "HealthController_ready",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "Request error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message",
+                    "details",
+                    "requestId"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ],
+        "description": "Public endpoint."
+      }
+    }
+  },
+  "info": {
+    "title": "Tidepool API",
+    "description": "",
+    "version": "1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "guest": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "tp_guest"
+      },
+      "committee": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "tp_committee"
+      }
+    },
+    "schemas": {}
+  }
+}

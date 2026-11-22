@@ -1,0 +1,126 @@
+.subpage,
+.detail-page {
+  padding-block: 32px 65px;
+}
+.page-title {
+  padding: 14px 0 26px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+.page-title h1 {
+  margin-top: 12px;
+}
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(30px, 6vw, 100px);
+  align-items: center;
+}
+.detail-art {
+  overflow: hidden;
+  border: 1px solid #ccbeaa;
+  border-radius: 14px;
+  background: var(--cream);
+}
+.detail-art img {
+  aspect-ratio: 1.4;
+  object-fit: cover;
+  width: 100%;
+}
+.poster-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  font: 0.68rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  background: #f1e5cf;
+}
+.detail-copy h1 {
+  font-size: clamp(3rem, 4.6vw, 5.2rem);
+  margin: 13px 0;
+}
+.host,
+.muted,
+.feedback {
+  color: var(--muted);
+}
+.facts {
+  border-block: 1px solid var(--line);
+  display: grid;
+  gap: 15px;
+  padding: 18px 0;
+  margin: 19px 0;
+}
+.facts > div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.facts svg {
+  width: 20px;
+  flex-shrink: 0;
+  color: var(--rust);
+}
+.facts span {
+  font-size: 0.855rem;
+  color: var(--muted);
+}
+.facts b {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.wide {
+  width: 100%;
+}
+.detail-tools {
+  justify-content: center;
+  margin-top: 9px;
+}
+.detail-tools button,
+.text-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
+  padding: 7px;
+}
+.body-copy {
+  max-width: 750px;
+  margin-top: 38px;
+}
+.body-copy h2,
+.empty h2,
+.form h2,
+.roster h2,
+.pass h2 {
+  font-size: 2.6rem;
+}
+.body-copy h1,
+.body-copy h2 {
+  margin: 12px 0;
+}
+.body-copy > p:not(.eyebrow) {
+  color: #485957;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+.body-copy .solid {
+  margin-top: 20px;
+}
+.about-art {
+  background: url('/art/hero.webp') center/cover;
+  height: 220px;
+  border-radius: 13px;
+}
