@@ -13,6 +13,21 @@ import { Errors, log } from './common/errors'
 import { describeApi } from './common/openapi'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
+function isAllowedOrigin(req: Request) {
+  const value = req.get('origin')
+  if (!value) return false
+  try {
+    const origin = new URL(value)
+    if (!['http:', 'https:'].includes(origin.protocol) || origin.origin !== value) return false
+    const host = req.get('host')
+    if (!host) return origin.origin === config.origin
+    const requestOrigin = new URL(`${req.protocol}://${host}`).origin
+    return origin.origin === config.origin || origin.origin === requestOrigin
+  } catch {
+    return false
+  }
+}
+
 export async function createApplication() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   app.setGlobalPrefix('api/v1', { exclude: ['health/live', 'health/ready'] })
@@ -36,13 +51,13 @@ export async function createApplication() {
         'Request',
       ),
     )
+    const publicEvents =
+      req.method === 'GET' && /^\/api\/v1\/events(?:\/[a-z0-9-]+)?$/.test(req.path)
     res.setHeader(
       'Cache-Control',
-      req.method === 'GET' && /^\/api\/v1\/events(?:\/[a-z0-9-]+)?$/.test(req.path)
-        ? 'public,max-age=0,must-revalidate'
-        : 'no-store',
+      publicEvents ? 'public, s-maxage=5, stale-while-revalidate=10' : 'no-store',
     )
-    if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && req.headers.origin !== config.origin)
+    if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && !isAllowedOrigin(req))
       return res.status(403).json({
         code: 'FORBIDDEN',
         message: 'Request origin is not allowed.',
