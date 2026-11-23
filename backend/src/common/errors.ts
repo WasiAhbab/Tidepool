@@ -11,15 +11,21 @@ export class Errors implements ExceptionFilter {
     const status = error instanceof HttpException ? error.getStatus() : 500
     const message =
       error instanceof HttpException ? error.message : 'We could not finish that request.'
-    if (status >= 500)
+    if (status >= 500) {
+      const diagnostic = error as { code?: unknown; severity?: unknown; routine?: unknown }
       log.error(
         {
           requestId: res.locals.requestId,
           status,
           type: error instanceof Error ? error.name : 'Error',
+          causeCode: typeof diagnostic?.code === 'string' ? diagnostic.code : undefined,
+          causeSeverity:
+            typeof diagnostic?.severity === 'string' ? diagnostic.severity : undefined,
+          causeRoutine: typeof diagnostic?.routine === 'string' ? diagnostic.routine : undefined,
         },
         'Request failed',
       )
+    }
     res.status(status).json({
       code:
         (
