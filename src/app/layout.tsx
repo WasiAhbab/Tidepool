@@ -44,7 +44,8 @@ export default async function Layout({
   children: React.ReactNode
   invite: React.ReactNode
 }) {
-  const theme = (await cookies()).get('tp_theme')?.value === 'dark' ? 'dark' : 'light'
+  const savedTheme = (await cookies()).get('tp_theme')?.value
+  const theme = savedTheme === 'light' ? 'light' : 'dark'
   return (
     <html
       lang="en"
