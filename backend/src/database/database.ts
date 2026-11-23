@@ -7,13 +7,29 @@ import {
 } from '@nestjs/common'
 import { Pool, PoolClient } from 'pg'
 import { randomBytes } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import type { Request } from 'express'
 import { config, runtime } from '../config/env'
 import { Session, Role, hash, signature } from '../common/validation'
 @Injectable()
 export class Database implements OnModuleDestroy {
+  private connectionString = (() => {
+    const url = new URL(config.db)
+    // pg-connection-string v2.14 treats sslmode=require as certificate
+    // verification; Supabase uses a private CA, which we trust below instead.
+    url.searchParams.delete('sslmode')
+    return url.toString()
+  })()
   pool = new Pool({
-    connectionString: config.db,
+    connectionString: this.connectionString,
+    // Supabase's database certificate is signed by its private CA. Trust that
+    // CA explicitly so serverless connections can verify TLS without disabling
+    // certificate checks.
+    ssl: {
+      ca: readFileSync(join(process.cwd(), 'backend/src/database/supabase-ca.crt'), 'utf8'),
+      rejectUnauthorized: true,
+    },
     max: runtime.DB_POOL_MAX,
     connectionTimeoutMillis: 5000,
     // Keep the single pooled connection alive across normal pauses between clicks.

@@ -1,4 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["hnd1"]
+  "regions": ["hnd1"],
+  "functions": {
+    "src/pages/api/[...path].ts": {
+      "includeFiles": "backend/src/database/supabase-ca.crt"
+    }
+  }
 }
