@@ -16,7 +16,9 @@ export class Database implements OnModuleDestroy {
     connectionString: config.db,
     max: runtime.DB_POOL_MAX,
     connectionTimeoutMillis: 5000,
-    idleTimeoutMillis: 10000,
+    // Keep the single pooled connection alive across normal pauses between clicks.
+    // Short idle expiry made Vercel serverless requests repeatedly reconnect to Supabase.
+    idleTimeoutMillis: 60000,
     statement_timeout: 12000,
     options: '-c search_path=society,public -c idle_in_transaction_session_timeout=15000',
   })

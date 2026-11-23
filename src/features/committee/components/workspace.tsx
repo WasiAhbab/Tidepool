@@ -14,7 +14,7 @@ import {
   LockKeyhole,
   LogOut,
 } from 'lucide-react'
-import { api, ApiError, reason } from '@/services/api-client'
+import { api, ApiError, prefetchResource, reason } from '@/services/api-client'
 import { Staff, useStaff } from '@/store/auth-store'
 const links = [
   ['Events', '/dashboard', CalendarDays],
@@ -25,6 +25,19 @@ const links = [
   ['Team', '/dashboard/team', Users],
   ['Settings', '/dashboard/settings', Settings],
 ] as const
+
+const sectionResources: Record<string, string[]> = {
+  '/dashboard/programme': ['committee/events'],
+  '/dashboard/check-in': ['check-in/events'],
+  '/dashboard/announcements': ['committee/events'],
+  '/dashboard/analytics': ['committee/analytics'],
+  '/dashboard/team': ['committee/team'],
+  '/dashboard/settings': ['committee/mail', 'committee/audit'],
+}
+
+function warmSection(url: string) {
+  for (const path of sectionResources[url] || []) void prefetchResource(path).catch(() => {})
+}
 export function Workspace({ children }: { children: React.ReactNode }) {
   const { staff, setStaff } = useStaff(),
     path = usePathname(),
@@ -160,8 +173,14 @@ export function Workspace({ children }: { children: React.ReactNode }) {
               href={url}
               prefetch
               scroll={false}
-              onMouseEnter={() => router.prefetch(url)}
-              onFocus={() => router.prefetch(url)}
+              onMouseEnter={() => {
+                router.prefetch(url)
+                warmSection(url)
+              }}
+              onFocus={() => {
+                router.prefetch(url)
+                warmSection(url)
+              }}
             >
               <Icon size={17} />
               {label}

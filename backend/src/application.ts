@@ -67,8 +67,6 @@ export async function createApplication() {
     next()
   })
 
-  const db = app.get(Database)
-  await db.pool.query('select 1 from events limit 1')
   if (process.env.NODE_ENV !== 'production') {
     const doc = SwaggerModule.createDocument(
       app,
